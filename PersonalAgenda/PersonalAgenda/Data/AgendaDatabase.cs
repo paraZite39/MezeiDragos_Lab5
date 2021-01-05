@@ -1,27 +1,24 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using PersonalAgenda.Models;
+using System.Text;
 
 namespace PersonalAgenda.Data
 {
-    class AgendaDatabase
+    public class AgendaDatabase
     {
         readonly SQLiteAsyncConnection _database;
-
         public AgendaDatabase(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
-            _database.CreateTableASync<Agenda>().Wait();
+            _database.CreateTableAsync<Agenda>().Wait();
         }
-
         public Task<List<Agenda>> GetNotesAsync()
         {
             return _database.Table<Agenda>().ToListAsync();
         }
-
         public Task<Agenda> GetNoteAsync(int id)
         {
             return _database.Table<Agenda>()
@@ -44,4 +41,5 @@ namespace PersonalAgenda.Data
             return _database.DeleteAsync(note);
         }
     }
+
 }

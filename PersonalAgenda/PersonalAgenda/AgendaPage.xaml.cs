@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PersonalAgenda.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,11 @@ namespace PersonalAgenda
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AgendaPage : ContentPage
     {
+        public AgendaPage()
+        {
+            InitializeComponent();
+        }
+
         protected override async void OnAppearing()
         {
             base.OnAppearing();
@@ -21,6 +27,7 @@ namespace PersonalAgenda
         {
             await Navigation.PushAsync(new NotePage
             {
+
                 BindingContext = new Agenda()
             });
         }
@@ -33,10 +40,6 @@ namespace PersonalAgenda
                     BindingContext = e.SelectedItem as Agenda
                 });
             }
-        }
-        public AgendaPage()
-        {
-            InitializeComponent();
         }
     }
 }

@@ -13,7 +13,11 @@ namespace PersonalAgenda
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NotePage : ContentPage
     {
-       async void OnSaveButtonClicked(object sender, EventArgs e)
+        public NotePage()
+        {
+            InitializeComponent();
+        }
+        async void OnSaveButtonClicked(object sender, EventArgs e)
         {
             var note = (Agenda)BindingContext;
             note.Date = DateTime.UtcNow;
@@ -26,9 +30,6 @@ namespace PersonalAgenda
             await App.Database.DeleteNoteAsync(note);
             await Navigation.PopAsync();
         }
-        public NotePage()
-        {
-            InitializeComponent();
-        }
+
     }
 }
